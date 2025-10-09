@@ -30,7 +30,7 @@ public class Palavra implements Comparable<Palavra>
             char caractereAtual = this.texto.charAt(pos);
             if (Character.toUpperCase(caractereAtual) == Character.toUpperCase(letra))
             {
-                if (ocorrencias == i) return pos;
+                if (ocorrencias == i) return pos+1;
 
                 ocorrencias++;
             }
@@ -56,7 +56,7 @@ public class Palavra implements Comparable<Palavra>
         if (obj==null) return false;
         if (obj.getClass()!=this.getClass()) return false;
         Palavra p = (Palavra) obj;
-        if (p.texto.equalsIgnoreCase(this.texto)) return false;
+        if (!p.texto.equalsIgnoreCase(this.texto)) return false;
         return true;
     }
 
@@ -64,7 +64,7 @@ public class Palavra implements Comparable<Palavra>
     public int hashCode ()
     {
         int result = 1;
-        result = 31 * result + new String(this.texto).hashCode();
+        if (this.texto != null) result = 31 * result + this.texto.hashCode();
         if (result < 0) result = -result;
         return result;
     }
